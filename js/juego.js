@@ -1,7 +1,7 @@
-/*
+
 import { Baraja } from "./baraja.js";
 import { Carta } from "./carta";
-*/
+
 class Juego {
   game() {
     for (let index = 0; index < 5; index++) {

@@ -1,50 +1,9 @@
 class Carta {
-  constructor(palos, numeros,valor) {
+  constructor(palos, numeros) {
     this.palo = palos;
     this.numero = numeros;
-    this.valores = valor;
+    //this.valores = valor;
   }
 }
-var carta1 = new Carta("Bastos",1,1);
-var carta2 = new Carta("Bastos",2,2);
-var carta3 = new Carta("Bastos",3,3);
-var carta4 = new Carta("Bastos",4,4);
-var carta5 = new Carta("Bastos",5,5);
-var carta6 = new Carta("Bastos",6,6);
-var carta7 = new Carta("Bastos",7,7);
-var carta8 = new Carta("Bastos",10,0.5);
-var carta9 = new Carta("Bastos",11,0.5);
-var carta10 = new Carta("Bastos",12,0.5);
-var carta11 = new Carta("Espadas",1,1);
-var carta12 = new Carta("Espadas",2,2);
-var carta13 = new Carta("Espadas",3,3);
-var carta14 = new Carta("Espadas",4,4);
-var carta15 = new Carta("Espadas",5,5);
-var carta16 = new Carta("Espadas",6,6);
-var carta17 = new Carta("Espadas",7,7);
-var carta18 = new Carta("Espadas",10,0.5);
-var carta19 = new Carta("Espadas",11,0.5);
-var carta20 = new Carta("Espadas",12,0.5);
-var carta21 = new Carta("Copas",1,1);
-var carta22 = new Carta("Copas",2,2);
-var carta23 = new Carta("Copas",3,3);
-var carta24 = new Carta("Copas",4,4);
-var carta25 = new Carta("Copas",5,5);
-var carta26 = new Carta("Copas",6,6);
-var carta27 = new Carta("Copas",7,7);
-var carta28 = new Carta("Copas",10,0.5);
-var carta29 = new Carta("Copas",11,0.5);
-var carta30 = new Carta("Copas",12,0.5);
-var carta31 = new Carta("Oros",1,1);
-var carta32 = new Carta("Oros",2,2);
-var carta33 = new Carta("Oros",3,3);
-var carta34 = new Carta("Oros",4,4);
-var carta35 = new Carta("Oros",5,5);
-var carta36 = new Carta("Oros",6,6);
-var carta37 = new Carta("Oros",7,7);
-var carta38 = new Carta("Oros",10,0.5);
-var carta39 = new Carta("Oros",11,0.5);
-var carta40 = new Carta("Oros",12,0.5);
-console.log(carta1);
-console.log(carta12);
-//export  {Carta}; 
+
+export  {Carta}; 
