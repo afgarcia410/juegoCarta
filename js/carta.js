@@ -4,6 +4,8 @@ class Carta {
     this.numero = numeros;
     //this.valores = valor;
   }
+  mostrarCarta(){
+    return console.log(this.numero+" de "+this.palo);
+  }
 }
-
 export  {Carta}; 

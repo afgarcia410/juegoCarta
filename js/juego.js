@@ -1,31 +1,18 @@
 
 import { Baraja } from "./baraja.js";
-import { Carta } from "./carta";
 
 class Juego {
-  game() {
-    for (let index = 0; index < 5; index++) {
-      var resultado = azar() + azar();
-      var prueba = document.getElementById("prueba");
-      var win = document.getElementById("ganada");
-      var winn = rondaG();
-      var perd = document.getElementById("perdido");
-      var perdd = rondaP();
-      if (resultado >= 8) {
-        console.log(resultado + ". Has perdido");
-        prueba.innerHTML += resultado + ". Has perdido<br>";
-      } else if (resultado == 7.5) {
-        console.log(resultado + ".Has llegado a 7 y medio");
-        prueba.innerHTML += resultado + "<br>";
-      } else {
-        console.log(resultado);
-        prueba.innerHTML += resultado + "<br>";
-        win.innerHTML += winn;
-        perd.innerHTML += perdd;
-      }
-    }
+  constructor(){
+    this.baraja =new Baraja();
+    this.baraja.barajar();
+    this.barajaJugador = [];
+    this.barajaJugador2 = [];
+    this.puntuacionJug1=0;
+    this.puntuacionJug2=0;
   }
+  
 }
+let juego1=new Juego();
 function reloadPage(){
   window.location.reload();
 }
