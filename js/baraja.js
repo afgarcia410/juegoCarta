@@ -18,23 +18,21 @@ class Baraja {
         this.baraja.push(new Carta(palos, numeros));
       });
     });
-    
   }
-  //Modificar para que baraje correctamente
   barajar(){
     for (let i = this.baraja.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [this.baraja[i], this.baraja[j]] = [this.baraja[j], this.baraja[i]];
     }
+    return this.baraja;
   }
   tomarCarta() {
     return this.baraja.shift();
   }
 }
-let barajas = new Baraja();
-let baraja2 = new Baraja();
-console.log(barajas);
-console.log(barajas.tomarCarta());
-console.log(barajas.tomarCarta());
-console.log(baraja2);
+
+// let barajas = new Baraja();
+// console.log(barajas.barajar());
+// console.log(barajas.tomarCarta());
+// console.log(barajas.tomarCarta());
 export { Baraja };
