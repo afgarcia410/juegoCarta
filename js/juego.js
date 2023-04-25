@@ -3,92 +3,107 @@ import { Baraja } from "./baraja.js";
 class Juego {
   constructor() {
     this.baraja = new Baraja();
-    //this.baraja.barajar();
-    this.barajaJugador = [this.baraja.tomarCarta()];
-    this.barajaJugador2 = [this.baraja.tomarCarta()];
-    // this.puntuacionJug1 = 0;
-    // this.puntuacionJug2 = 0;
-    this.calcularPuntuacion();
-    this.mostrarMano();
+    this.baraja.barajar();
+    this.barajaJugador = [this.baraja.tomarCarta()]; 
+    this.barajaJugador2 = [this.baraja.tomarCarta()]; 
+    this.mostrarJuego();
+    //Para pedir carta
+    document.getElementById("pedir-cartas-btn").addEventListener("click", () => {
+        this.barajaJugador.push(this.baraja.tomarCarta());
+        this.mostrarJuego();
+
+        if (this.calculaPuntuacionMano(this.barajaJugador) > 7.5) {
+          this.mostrarMensaje("Te pasaste de 7 y medio. ¡Perdiste!");
+          this.mostrarPuntos(this.barajaJugador2);
+        }
+      });
+
+    document.getElementById("plantarse-btn").addEventListener("click", () => {
+      while (this.calculaPuntuacionMano(this.barajaJugador2) < 5.5) {
+        this.barajaJugador2.push(this.baraja.tomarCarta());
+      }
+      this.mostrarJuego();
+      this.juegoTerminado();
+      document.getElementById("reset").addEventListener("click", () => {
+        window.location.reload();
+      });
+    });
   }
-  calcularPuntuacion() {
-    this.puntuacionJug1 =this.calculaPuntuacionMano(this.barajaJugador);
-    this.puntuacionJug2 =this.calculaPuntuacionMano(this.barajaJugador2);
-  }
-  calculaPuntuacionMano(mano){
-    //Calcula la puntuacion de la mano(conjunto de cartas de una baraja) que tiene cada jugador
-    let puntuacion = 0;
-    for( const manos of mano){
-      const valorCarta = manos.getValorNumero();
+  //Fallo
+  calculaPuntuacionMano(mano) {
+    let puntos = 0;
+    for (let carta of mano) {
+      puntos += carta.getValorNumero();
     }
-    while (puntuacion>7.5) {
+    while (puntos > 7.5) {
+      //puntos -= 10;
+    }
+    
+    return puntos;
+  }
+
+  mostrarCartas(mano, elemento) {
+    elemento.innerHTML = "";
+    for (let carta of mano) {
+      let cartaElemento = document.createElement("div");
+      cartaElemento.classList.add("carta");
+      cartaElemento.classList.add(carta.palo);
+      cartaElemento.innerText = carta.numero+ " de "+carta.palo;
       
-    }
-    return puntuacion;
-  }
-  mostrarMano(){
-    console.log("Las cartas del jugador 1 son: ");
-    for(const carta of this.barajaJugador){
-      console.log(carta.mostrarCarta());
-    }
-    console.log("Las cartas del jugador 2 son: ");
-    for(const carta of this.barajaJugador2){
-      console.log(carta.mostrarCarta());
+      elemento.appendChild(cartaElemento);
     }
   }
-  pedirCarta(){
-    //Añadir otra carta a la baraja del jugador
-    this.barajaJugador.push(this.baraja.tomarCarta()); //Al pedir carta, la siguiente desaparce del array baraja
-    //Para mas adelante
-    if(this.puntuacionJug1 >= 7.5){
-      console.log("Has perdido");
-    }
+
+  mostrarJuego() {
+    this.mostrarCartas(
+      this.barajaJugador,
+      document.getElementById("mano-jugador")
+    );
+    this.mostrarCartas(
+      this.barajaJugador2,
+      document.getElementById("mano-casa")
+    );
+    this.mostrarPuntos(this.barajaJugador);
   }
-  plantarse(){
-    while(this.puntuacionJug2 <7.5){
-      this.barajaJugador2.push(this.baraja.tomarCarta());
-      this.calcularPuntuacion();
-    }
-    //Hacer metodo juegoTerminado();
-    this.juegoTerminado();
+
+  mostrarPuntos(mano) {
+    let puntos = this.calculaPuntuacionMano(mano);
+    document.getElementById("puntos-jugador").innerText = "Tu puntacion: "+puntos.toString();
   }
-  juegoTerminado(){
-    console.log("Las cartas del jugador 1 son: ");
-    for(const carta of this.barajaJugador){
-      console.log(carta.mostrarCarta());
-    }
-    console.log("Puntuación del jugador 1: "+this.puntuacionJug1);
-    console.log("Las cartas del jugador 2 son: ");
-    for(const carta of this.barajaJugador2){
-      console.log(carta.mostrarCarta());
-    }
-    console.log("Puntuación del jugador 2: "+this.puntuacionJug2);
-    if(this.puntuacionJug2>7.5){
-      console.log("Enhorabuena,has ganado!!.");
-    } else if (this.puntuacionJug1>7.5){
-      console.log("Has perdido.")
-    } else if(this.puntuacionJug1>this.puntuacionJug2){
-      console.log("Enhorabuena,has ganado!!.");
-    }else if(this.puntuacionJug2>this.puntuacionJug1){
-      console.log("Has perdido.");
-    } else{
-      console.log("Habeis empatado a puntos.");
-    }
+
+  mostrarMensaje(mensaje) {
+    document.getElementById("mensaje").innerText = mensaje;
   }
-  
+
+  juegoTerminado() {
+    let puntosJugador = this.calculaPuntuacionMano(this.barajaJugador);
+    let puntoJugador2 = this.calculaPuntuacionMano(this.barajaJugador2);
+
+    if (puntosJugador > 7.5) {
+      this.mostrarMensaje("Te pasaste de 7 y medio. ¡Perdiste!");
+      document.getElementById("pedir-cartas-btn").disabled = true;
+    } else if (puntoJugador2 > 7.5) {
+      this.mostrarMensaje("La casa se pasó de 7 y medio. ¡Ganaste!");
+      document.getElementById("pedir-cartas-btn").disabled = true;
+    } else if (puntosJugador > puntoJugador2) {
+      this.mostrarMensaje("¡Ganaste!");
+      document.getElementById("pedir-cartas-btn").disabled = true;
+    } else if (puntoJugador2 > puntosJugador) {
+      this.mostrarMensaje("Perdiste.");
+      document.getElementById("pedir-cartas-btn").disabled = true;
+    } else {
+      this.mostrarMensaje("¡Empate!");
+      document.getElementById("pedir-cartas-btn").disabled = true;
+    }
+
+    this.mostrarPuntos(this.barajaJugador2);
+  }
 }
-
-let juego1 = new Juego();
-
-console.log(juego1.baraja);
-console.log(juego1.pedirCarta());
-console.log(juego1.mostrarMano());
-console.log(juego1.baraja);
-var darBtn = document.getElementById("dar").addEventListener("click",juego1.pedirCarta());
-
-function reloadPage() {
-  window.location.reload();
-}
-var boton = (document.getElementById("button").onclick = function () {
-  reloadPage();
+document.addEventListener("DOMContentLoaded", () => {
+  new Juego();
+  console.log("Eljuego se ha cargado correctamente.")
 });
+/*
+const juego1=new Juego();
+juego1;
+*/

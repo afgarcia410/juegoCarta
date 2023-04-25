@@ -4,15 +4,7 @@
 body{
     background-color: rgb(55, 101, 77);
 }
-#button{
+button{
     background-color: rgb(209, 45, 54);
 }
-#repartir{
-    background-color: rgb(209, 45, 54);
-}
-#dar{
-    background-color: rgb(209, 45, 54);
-}
-#mantener{
-    background-color: rgb(209, 45, 54);
-}
+

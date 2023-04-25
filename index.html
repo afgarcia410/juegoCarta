@@ -4,15 +4,23 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <title>Siete y medio</title>
   </head>
   <body>
-    <h1>Siete y media</h1>
-    <button id="button">Restart</button>
-    <button id="repartir">Distribute</button>
-    <button id="dar">Give Card</button>
-    <button id="mantener">Keep</button>
+    <h1>Siete y meedia</h1>
+    <div id="mensaje"></div>
+    <p>Mano Jugador 1</p>
+    <div id="mano-jugador" class="mano"></div>
+    <div id="puntos-jugador"></div>
+    <br>
+    <p>Mano de la casa</p>
+    <div id="mano-casa" class="mano"></div>
+    <div id="botones">
+      <button id="pedir-cartas-btn">Pedir cartas</button>
+      <button id="plantarse-btn">Plantarse</button>
+      <button id="reset">Reset</button>
+    </div>
     <script type="module" src="js/juego.js"></script>
   </body>
 </html>
