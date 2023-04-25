@@ -15,7 +15,6 @@ class Juego {
         this.mostrarJuego();
 
         if (this.calculaPuntuacionMano(this.barajaJugador) > 7.5) {
-          console.log(this.calculaPuntuacionMano(this.barajaJugador));
           this.mostrarMensaje("Te pasaste de 7 y medio. ¡Perdiste!");
           this.mostrarPuntos(this.barajaJugador2);
         }
@@ -36,9 +35,7 @@ class Juego {
   calculaPuntuacionMano(mano) {
     let puntos = 0;
     for (let carta of mano) {
-      console.log(puntos);
-      puntos += carta.puntos;
-      console.log(puntos);
+      puntos += carta.getValorNumero();
     }
     while (puntos > 7.5) {
       //puntos -= 10;
@@ -53,7 +50,8 @@ class Juego {
       let cartaElemento = document.createElement("div");
       cartaElemento.classList.add("carta");
       cartaElemento.classList.add(carta.palo);
-      cartaElemento.innerText = carta.nombre;
+      cartaElemento.innerText = carta.numero+ " de "+carta.palo;
+      
       elemento.appendChild(cartaElemento);
     }
   }
@@ -63,20 +61,16 @@ class Juego {
       this.barajaJugador,
       document.getElementById("mano-jugador")
     );
-    console.log(this.barajaJugador);
     this.mostrarCartas(
       this.barajaJugador2,
       document.getElementById("mano-casa")
     );
-    console.log(this.barajaJugador2);
     this.mostrarPuntos(this.barajaJugador);
   }
 
   mostrarPuntos(mano) {
     let puntos = this.calculaPuntuacionMano(mano);
-    console.log(puntos.toString());
     document.getElementById("puntos-jugador").innerText = "Tu puntacion: "+puntos.toString();
-    console.log("Puntos jugador 1: "+puntos.toString());
   }
 
   mostrarMensaje(mensaje) {
