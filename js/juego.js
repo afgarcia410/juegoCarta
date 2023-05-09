@@ -43,7 +43,9 @@ class Juego {
     }
         return resultado;
   }
-
+  juego2(){
+    
+  }
 
 
   //Fallo
@@ -121,6 +123,7 @@ class Juego {
 
     this.mostrarPuntos(this.barajaJugador2);
   }
+  
 }
 
 document.addEventListener("DOMContentLoaded", () => {
