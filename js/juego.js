@@ -3,9 +3,9 @@ import { Baraja } from "./baraja.js";
 class Juego {
   constructor() {
     this.baraja = new Baraja();
-    this.baraja.barajar();
     this.barajaJugador = [this.baraja.tomarCarta()]; 
     this.barajaJugador2 = [this.baraja.tomarCarta()]; 
+    
     this.mostrarJuego();
     //Para pedir carta
     document.getElementById("pedir-cartas-btn").addEventListener("click", () => {
@@ -25,20 +25,34 @@ class Juego {
       this.mostrarJuego();
       this.juegoTerminado();
       document.getElementById("reset").addEventListener("click", () => {
-        window.location.reload();
+        new Juego();
+        document.getElementById("pedir-cartas-btn").disabled = false;
+        document.getElementById("mensaje").innerHTML="";
       });
     });
   }
+
+  sieteYMedio(carta){
+
+    let resultado = 0; 
+    for(let cartas of carta){
+      this.barajaJugador.push(carta.valor);  
+      this.barajaJugador.forEach(puntuacion =>{
+          resultado += puntuacion;
+      });    
+    }
+        return resultado;
+  }
+
+
+
   //Fallo
   calculaPuntuacionMano(mano) {
     let puntos = 0;
     for (let carta of mano) {
-      puntos += carta.getValorNumero();
+      puntos += carta.getValor();
+      //puntos += valor;
     }
-    while (puntos > 7.5) {
-      //puntos -= 10;
-    }
-    
     return puntos;
   }
 
@@ -68,7 +82,7 @@ class Juego {
 
   mostrarPuntos(mano) {
     let puntos = this.calculaPuntuacionMano(mano);
-    document.getElementById("puntos-jugador").innerText = "Tu puntacion: "+puntos.toString();
+    document.getElementById("puntos-jugador").innerText = "Tu puntacion: "+puntos;
   }
 
   mostrarMensaje(mensaje) {
@@ -78,19 +92,28 @@ class Juego {
   juegoTerminado() {
     let puntosJugador = this.calculaPuntuacionMano(this.barajaJugador);
     let puntoJugador2 = this.calculaPuntuacionMano(this.barajaJugador2);
-
+    let totalGanada =0;
+    let totalPerdida =0;
     if (puntosJugador > 7.5) {
       this.mostrarMensaje("Te pasaste de 7 y medio. ¡Perdiste!");
       document.getElementById("pedir-cartas-btn").disabled = true;
+      totalPerdida++;
+      document.getElementById("pPerdidas").innerHTML = totalPerdida;
     } else if (puntoJugador2 > 7.5) {
       this.mostrarMensaje("La casa se pasó de 7 y medio. ¡Ganaste!");
       document.getElementById("pedir-cartas-btn").disabled = true;
+      totalGanada++;
+      document.getElementById("pGanadas").innerHTML = totalGanada;
     } else if (puntosJugador > puntoJugador2) {
       this.mostrarMensaje("¡Ganaste!");
       document.getElementById("pedir-cartas-btn").disabled = true;
+      totalGanada++;
+      document.getElementById("pGanadas").innerHTML = totalGanada;
     } else if (puntoJugador2 > puntosJugador) {
       this.mostrarMensaje("Perdiste.");
       document.getElementById("pedir-cartas-btn").disabled = true;
+      totalPerdida++;
+      document.getElementById("pPerdidas").innerHTML = totalPerdida;
     } else {
       this.mostrarMensaje("¡Empate!");
       document.getElementById("pedir-cartas-btn").disabled = true;
@@ -99,11 +122,8 @@ class Juego {
     this.mostrarPuntos(this.barajaJugador2);
   }
 }
+
 document.addEventListener("DOMContentLoaded", () => {
   new Juego();
-  console.log("Eljuego se ha cargado correctamente.")
 });
-/*
-const juego1=new Juego();
-juego1;
-*/
+export { Juego };
