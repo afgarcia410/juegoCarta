@@ -1,30 +1,42 @@
-import { Carta } from "./carta.js";
-class Baraja {
-  constructor() {
-    this.baraja = [];
-    const palosBaraja = ["Bastos", "Copas", "Espadas", "Oros"];
-    const numerosBaraja = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-    
-    const filtroNumero = numerosBaraja.filter((valor) =>{
-      return valor !=8 && valor !=9;
-    });
-    palosBaraja.forEach((palos) => {
-      filtroNumero.forEach((numeros) => {
-        this.baraja.push(new Carta(palos, numeros));
-      });
-    });
-  }
-  
-  tomarCarta() {
-    for (let i = this.baraja.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [this.baraja[i], this.baraja[j]] = [this.baraja[j], this.baraja[i]];
-    }
+import {Carta} from "./carta.js";
 
-    // Extraer la primera carta del mazo
-    return this.baraja.splice(0, 1)[0];
-    //return this.baraja.splice( Math.floor(Math.random() * (this.baraja.length + 1)),1);
-    //return this.baraja.shift();
-  }
+class Baraja{
+
+    constructor(reglas){
+        let barajaInicial = [];
+        this.palo = ["Oros", "Copas", "Espadas", "Bastos"];
+        
+        this.palo.forEach(element => {
+            for(let i = 1; i <= 12; i++){
+                barajaInicial.push(new Carta(i, element));
+            }
+        });
+        
+        let filtro = barajaInicial.filter(carta => {
+            reglas.descartes.forEach(element => {
+                if(carta.numero == element.numero){
+                    carta.valida = false;
+                }
+            })
+        });
+        
+        this.baraja = barajaInicial.filter(carta => carta.valida == true);
+        
+    }
+    reparteCarta(){
+        // let num = Math.floor(Math.random()*(this.baraja.length - 1));
+        // let carta = this.baraja[num];
+        // this.baraja = this.baraja.filter(carta => carta != this.baraja[num]);
+        // console.log(this.baraja);
+        // return carta;
+        for (let i = this.baraja.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [this.baraja[i], this.baraja[j]] = [this.baraja[j], this.baraja[i]];
+          }
+      
+          // Extraer la primera carta del mazo
+          return this.baraja.splice(0, 1)[0];
+    }
 }
-export { Baraja };
+
+export {Baraja}

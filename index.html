@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="style.css" />
-    <title>Siete y medio</title>
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7 y medio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
     <h1>Siete y meedia</h1>
-    <div id="mensaje"></div>
-    <p>Mano Jugador 1</p>
-    <div id="mano-jugador" class="mano"></div>
-    <div id="puntos-jugador"></div>
-    <br>
-    <p>Mano de la casa</p>
-    <div id="mano-casa" class="mano"></div>
-    <h3>Partidas ganadas: <h3 id="pGanadas"></h3></h3>
-    <h3>Partidas perdidas: <h3 id="pPerdidas"></h3></h3>
-    <div id="botones">
-      <button id="pedir-cartas-btn">Pedir cartas</button>
-      <button id="plantarse-btn">Plantarse</button>
-      <button id="reset">Reset</button>
+    
+    <h2 class="titulos" id="titulo1">Mano Jugador 1:&nbsp; </h2><h2 id="carta"></h2>    
+    <h2 class="titulos" id="titulo2">Puntuacion:&nbsp; </h2><h2 id="puntuacionCartas"></h2>
+    //Añadir para casa
+    <div class="BotonesEleccion">
+        <button id="boton7ymedio">7 y medio</button>
+        <button id="botonBurro">Burro</button>
+    </div>
+    <!-- <div id="numeros"></div> -->
+    <p class="titulos" id="titulo5">Contador de las cartas:&nbsp; </p><p id="contadorCartas"></p>
+    <h2 id="mensajeEstado"></h2>
+    <h3 class="titulos" id="titulo3">Partidas ganadas:&nbsp; </h3><h3 id="ganadas"></h3>
+    <h3 class="titulos" id="titulo4">Partidas perdidas:&nbsp; </h3><h3 id="perdidas"></h3>
+    <div class="containerBotones">
+        <button id="pedir-cartas-btn">Pedir Cartas</button>
+        <button id="plantarse-btn">Plantarse</button>
+        <button id="botonReset">Reset</button>
     </div>
     <script type="module" src="js/index.js"></script>
-  </body>
+</body>
 </html>
