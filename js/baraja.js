@@ -3,16 +3,16 @@ import {Carta} from "./carta.js";
 class Baraja{
 
     constructor(reglas){
-        let barajaInicial = [];
+        let baraja = [];
         this.palo = ["Oros", "Copas", "Espadas", "Bastos"];
         
         this.palo.forEach(element => {
             for(let i = 1; i <= 12; i++){
-                barajaInicial.push(new Carta(i, element));
+                baraja.push(new Carta(i, element));
             }
         });
         
-        let filtro = barajaInicial.filter(carta => {
+        let filtro = baraja.filter(carta => {
             reglas.descartes.forEach(element => {
                 if(carta.numero == element.numero){
                     carta.valida = false;
@@ -20,7 +20,7 @@ class Baraja{
             })
         });
         
-        this.baraja = barajaInicial.filter(carta => carta.valida == true);
+        this.baraja = baraja.filter(carta => carta.valida == true);
         
     }
     reparteCarta(){
