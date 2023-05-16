@@ -4,10 +4,8 @@ class Carta {
         this.numero = numero;
         this.palo = palo;
         this.valor;
-        this.valida = true;
+        this.correcta = true;
     }
-
 }
-
 
 export {Carta}

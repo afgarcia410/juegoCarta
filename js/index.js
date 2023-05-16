@@ -22,10 +22,12 @@ let normas = {
     {
       numero: 8,
       palo: "todos",
+      valor: null,
     },
     {
       numero: 9,
       palo: "todos",
+      valor: null,
     },
   ],
 };
@@ -37,6 +39,8 @@ const botonReset = document.getElementById("botonReset");
 
 const boton7ymedio = document.getElementById("boton7ymedio");
 const botonBurro = document.getElementById("botonBurro");
+const otroJuego = document.getElementById("otroJuego");
+otroJuego.style.display ="none";
 
 let titulo1 = document.getElementById("titulo1");
 let titulo2 = document.getElementById("titulo2");
@@ -56,12 +60,12 @@ titulo4.style.display = "none";
 titulo5.style.display = "none";
 titulo6.style.display = "none";
 titulo7.style.display = "none";
-// juego.sistema = 2; //problema de que no obtiene un valor de sistema
+
 boton7ymedio.onclick = function () {
-  juego.sistema = 1; //Para diferenciar el tipo de juego los divido en 1 para 7ymedio y 2 para el burro
-  botonCarta.style.display = "block";
-  plantarse.style.display = "block";
-  botonReset.style.display = "block";
+  juego.sistema = 1;
+  botonCarta.style.display = "inline-block";
+  plantarse.style.display = "inline-block";
+  botonReset.style.display = "inline-block";
   boton7ymedio.style.display = "none";
   botonBurro.style.display = "none";
   titulo1.style.display = "inline-block";
@@ -89,7 +93,7 @@ let puntuacionCartas = document.getElementById("puntuacionCartas");
 let carta2 = document.getElementById("carta2");
 let puntuacionCartas2 = document.getElementById("puntuacionCartas2");
 let contadorCartas = document.getElementById("contadorCartas");
-let mensajeEstado = document.getElementById("mensajeEstado");
+let mensaje = document.getElementById("mensaje");
 let ganadas = document.getElementById("ganadas");
 let perdidas = document.getElementById("perdidas");
 let totalPerdidas = 0;
@@ -107,13 +111,13 @@ botonCarta.onclick = function () {
     console.log(valorC);
     if (valorC > 7.5) {
       puntuacionCartas.innerHTML = valorC;
-      mensajeEstado.innerHTML = "Has perdido";
+      mensaje.innerHTML = "Te has pasado.Has perdido";
       botonCarta.disabled = true;
       totalPerdidas++;
       perdidas.innerHTML = totalPerdidas;
     } else if (valorC == 7.5) {
       puntuacionCartas.innerHTML = valorC;
-      mensajeEstado.innerHTML = "Has ganado";
+      mensaje.innerHTML = "Has ganado";
       botonCarta.disabled = true;
       totalGanadas++;
       ganadas.innerHTML = totalGanadas;
@@ -127,7 +131,7 @@ botonCarta.onclick = function () {
     let cartaContador = juego.burro();
     if (cartaJugador.numero == cartaContador) {
       contadorCartas.innerHTML = cartaContador;
-      mensajeEstado.innerHTML = "Has perdido";
+      mensaje.innerHTML = "Has perdido";
       botonCarta.disabled = true;
       totalPerdidas++;
       perdidas.innerHTML = totalPerdidas;
@@ -146,21 +150,21 @@ plantarse.addEventListener("click", () => {
   if (valorC < valorCasa) {
     puntuacionCartas.innerHTML = valorC;
     puntuacionCartas2.innerHTML = valorCasa;
-    mensajeEstado.innerHTML = "Has perdido";
+    mensaje.innerHTML = "Has perdido";
     botonCarta.disabled = true;
     plantarse.disabled = true;
     totalPerdidas++;
     perdidas.innerHTML = totalPerdidas;
   } else if (valorC > valorCasa) {
     puntuacionCartas.innerHTML = valorC;
-    mensajeEstado.innerHTML = "Has ganado";
+    mensaje.innerHTML = "Has ganado";
     botonCarta.disabled = true;
     plantarse.disabled = true;
     totalGanadas++;
     ganadas.innerHTML = totalGanadas;
   } else {
     puntuacionCartas.innerHTML = valorC;
-    mensajeEstado.innerHTML = "Has empatado";
+    mensaje.innerHTML = "Has empatado";
     botonCarta.disabled = true;
   }
 });
@@ -174,7 +178,7 @@ botonReset.addEventListener("click", () => {
   }
   botonCarta.disabled = false;
   plantarse.disabled = false;
-  mensajeEstado.innerHTML = " ";
+  mensaje.innerHTML = " ";
   puntuacionCartas.innerHTML = " ";
   contadorCartas.innerHTML = " ";
   carta.innerHTML = " ";

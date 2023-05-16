@@ -18,7 +18,6 @@ class Juego{
             });
         });
         this.reglas = reglas;
-        //console.log(this.baraja.baraja);
     }
     sieteYmedio(carta){
         let resultado = 0; 
