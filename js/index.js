@@ -1,4 +1,4 @@
-import { Baraja } from "./baraja.js";
+//import { Baraja } from "./baraja.js";
 import { Juego } from "./juego.js";
 let normas = {
   valores: [
@@ -96,33 +96,35 @@ let contadorCartas = document.getElementById("contadorCartas");
 let mensaje = document.getElementById("mensaje");
 let ganadas = document.getElementById("ganadas");
 let perdidas = document.getElementById("perdidas");
-let totalPerdidas = 0;
-let totalGanadas = 0;
+let partidasPerdidas = 0;
+let partidasGanadas = 0;
 let cartaJugador;
 let cartaCasa;
-let valorC;
-let valorCasa = 1;
+let valorCartaJugador;
+let valorCartaCasa =0;
+console.log(juego.baraja.valor);
 botonCarta.onclick = function () {
   if (juego.sistema == 1) {
     cartaJugador = juego.baraja.reparteCarta();
     console.log(cartaJugador);
+    
     carta.innerHTML += cartaJugador.numero + " de " + cartaJugador.palo;
-    valorC = juego.sieteYmedio(cartaJugador);
-    console.log(valorC);
-    if (valorC > 7.5) {
-      puntuacionCartas.innerHTML = valorC;
+    valorCartaJugador = juego.sieteYmedio(cartaJugador);
+    console.log(valorCartaJugador);
+    if (valorCartaJugador > 7.5) {
+      puntuacionCartas.innerHTML = valorCartaJugador;
       mensaje.innerHTML = "Te has pasado.Has perdido";
       botonCarta.disabled = true;
-      totalPerdidas++;
-      perdidas.innerHTML = totalPerdidas;
-    } else if (valorC == 7.5) {
-      puntuacionCartas.innerHTML = valorC;
+      partidasPerdidas++;
+      perdidas.innerHTML = partidasPerdidas;
+    } else if (valorCartaJugador == 7.5) {
+      puntuacionCartas.innerHTML = valorCartaJugador;
       mensaje.innerHTML = "Has ganado";
       botonCarta.disabled = true;
-      totalGanadas++;
-      ganadas.innerHTML = totalGanadas;
+      partidasGanadas++;
+      ganadas.innerHTML = partidasGanadas;
     } else {
-      puntuacionCartas.innerHTML = valorC;
+      puntuacionCartas.innerHTML = valorCartaJugador;
     }
   } else {
     let cartaJugador;
@@ -133,8 +135,8 @@ botonCarta.onclick = function () {
       contadorCartas.innerHTML = cartaContador;
       mensaje.innerHTML = "Has perdido";
       botonCarta.disabled = true;
-      totalPerdidas++;
-      perdidas.innerHTML = totalPerdidas;
+      partidasPerdidas++;
+      perdidas.innerHTML = partidasPerdidas;
     } else {
       contadorCartas.innerHTML = cartaContador;
     }
@@ -143,27 +145,27 @@ botonCarta.onclick = function () {
 plantarse.addEventListener("click", () => {
   botonCarta.disabled = true;
   cartaCasa = juego2.baraja.reparteCarta();
-  valorCasa = juego2.sieteYmedio(cartaCasa);
-  carta2.innerHTML += cartaCasa.numero + " de " + cartaCasa.palo;
   console.log(cartaCasa);
-  console.log(valorCasa);
-  if (valorC < valorCasa) {
-    puntuacionCartas.innerHTML = valorC;
-    puntuacionCartas2.innerHTML = valorCasa;
+  carta2.innerHTML += cartaCasa.numero + " de " + cartaCasa.palo;
+  valorCartaCasa = juego2.sieteYmedio(cartaCasa);
+  console.log(valorCartaJugador);
+  if (valorCartaJugador < valorCartaCasa) {
+    puntuacionCartas.innerHTML = valorCartaJugador;
+    puntuacionCartas2.innerHTML = valorCartaCasa;
     mensaje.innerHTML = "Has perdido";
     botonCarta.disabled = true;
     plantarse.disabled = true;
-    totalPerdidas++;
-    perdidas.innerHTML = totalPerdidas;
-  } else if (valorC > valorCasa) {
-    puntuacionCartas.innerHTML = valorC;
+    partidasPerdidas++;
+    perdidas.innerHTML = partidasPerdidas;
+  } else if (valorCartaJugador > valorCartaCasa) {
+    puntuacionCartas.innerHTML = valorCartaJugador;
     mensaje.innerHTML = "Has ganado";
     botonCarta.disabled = true;
     plantarse.disabled = true;
-    totalGanadas++;
-    ganadas.innerHTML = totalGanadas;
+    partidasGanadas++;
+    ganadas.innerHTML = partidasGanadas;
   } else {
-    puntuacionCartas.innerHTML = valorC;
+    puntuacionCartas.innerHTML = valorCartaJugador;
     mensaje.innerHTML = "Has empatado";
     botonCarta.disabled = true;
   }
